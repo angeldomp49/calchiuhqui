@@ -12,40 +12,40 @@ function App() {
       content: <div>hello div</div>
     },
     {
-      content: "hello world"
+      content: "hello world 1"
     },
     {
-      content: "hello world"
+      content: "hello world 2"
     },
     {
-      content: "hello world"
+      content: "hello world 3"
     },
     {
-      content: "hello world"
+      content: "hello world 4"
     },
     {
-      content: "hello world"
+      content: "hello world 5"
     },
     {
-      content: "hello world"
+      content: "hello world 6"
     },
     {
-      content: "hello world"
+      content: "hello world 7"
     },
     {
-      content: "hello world"
+      content: "hello world 8"
     },
     {
-      content: "hello world"
+      content: "hello world 9"
     }
   ];
 
   return (
     <div className="App">
       <ContextMenuParentListener
-        createMenu={ () =>
+        createMenu={ (bagInfo: any) =>
           <ul>
-            <li>option1</li>
+            <li>{bagInfo.content}</li>
             <li>option2</li>
             <li>option3</li>
             <li>option4</li>
@@ -55,7 +55,10 @@ function App() {
         <Grid cols={5} gap={2}>
           {
             items.map( (item: any) => 
-              <ContextMenuChildListener key={Id.generate()} > 
+              <ContextMenuChildListener 
+                key={Id.generate()} 
+                bagInfo={{content: item.content}}
+              > 
                 <Card>
                   {item.content}
                 </Card>

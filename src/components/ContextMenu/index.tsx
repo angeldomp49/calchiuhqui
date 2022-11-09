@@ -1,6 +1,5 @@
 import React, {useContext, useRef, useState} from 'react';
 import { Card } from '../Card';
-import { ContextMenuContext } from './global';
 
 import './index.scss';
 
@@ -11,7 +10,7 @@ export const ContextMenuParentListener = ({children, createMenu= () => {}}: any)
     const elementListener = useRef(document.createElement("div"));
     const [contextMenuElement, setContextMenuElement] = useState(<div></div>);
 
-    const handleContextMenu = (e: any) => {
+    const handleContextMenu = (e: any, bagInfo: any) => {
         e.preventDefault();
         setIsContextMenuOpen(false);
         setIsContextMenuOpen(true);
@@ -20,7 +19,7 @@ export const ContextMenuParentListener = ({children, createMenu= () => {}}: any)
             y: e.clientY
         });
 
-        const menu = createMenu();
+        const menu = createMenu(bagInfo);
         setContextMenuElement(menu);
     };
 
@@ -52,14 +51,14 @@ export const ContextMenuParentListener = ({children, createMenu= () => {}}: any)
     );
 };
 
-export const ContextMenuChildListener = ({children}: any) => {
+export const ContextMenuChildListener = ({children, bagInfo={}}: any) => {
 
     const handleContextMenu = useContext(ContextMenuContext);
 
     return(
         <div 
             className='context-child-listener' 
-            onContextMenu={handleContextMenu}
+            onContextMenu={ (e: any) => handleContextMenu(e, bagInfo) }
         >
             {children}
         </div>
@@ -100,3 +99,5 @@ export type Position = {
     x: number;
     y: number;
 };
+
+export const ContextMenuContext = React.createContext( (e: any, bagInfo: any) => {});

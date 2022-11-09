@@ -1,0 +1,18 @@
+
+.context-menu-listener{
+    display:contents;
+}
+
+.context-menu-container{
+    position: absolute;
+    z-index: 10;
+}
+
+.context-menu-card{
+    padding: 2rem;
+    background-color: #fff;
+}
+
+.context-child-listener{
+    display: contents;
+}

@@ -1,24 +1,68 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
+import { Grid } from './components/Grid';
+import { Card } from './components/Card';
+import { ContextMenuChildListener, ContextMenuParentListener } from './components/ContextMenu';
+import {Id} from '@makechtec/randomkey';
 
 function App() {
+
+  let items = [
+    {
+      content: <div>hello div</div>
+    },
+    {
+      content: "hello world"
+    },
+    {
+      content: "hello world"
+    },
+    {
+      content: "hello world"
+    },
+    {
+      content: "hello world"
+    },
+    {
+      content: "hello world"
+    },
+    {
+      content: "hello world"
+    },
+    {
+      content: "hello world"
+    },
+    {
+      content: "hello world"
+    },
+    {
+      content: "hello world"
+    }
+  ];
+
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ContextMenuParentListener
+        contextMenu={
+          <ul>
+            <li>option1</li>
+            <li>option2</li>
+            <li>option3</li>
+            <li>option4</li>
+          </ul>
+        }
+      >
+        <Grid cols={5} gap={2}>
+          {
+            items.map( (item: any) => 
+              <ContextMenuChildListener> 
+                <Card key={Id.generate()} >
+                  {item.content}
+                </Card>
+              </ContextMenuChildListener>)
+          }
+        </Grid>
+      </ContextMenuParentListener>
     </div>
   );
 }

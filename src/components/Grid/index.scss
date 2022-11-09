@@ -1,0 +1,10 @@
+
+.grid_wrapper{
+    display: grid;
+    grid-auto-rows: minmax(4rem, 10rem);
+    padding: 4rem;
+}
+
+.grid-item{
+    grid-column: 1fr;
+}

@@ -4,12 +4,12 @@ import { ContextMenuContext } from './global';
 
 import './index.scss';
 
-export const ContextMenuParentListener = ({children, contextMenu}: any) => {
+export const ContextMenuParentListener = ({children, createMenu= () => {}}: any) => {
 
     const [isContextMenuOpen, setIsContextMenuOpen] = useState(false);
     const [contextMenuPosition, setContextMenuPosition] = useState({x: 0, y: 0});
     const elementListener = useRef(document.createElement("div"));
-    
+    const [contextMenuElement, setContextMenuElement] = useState(<div></div>);
 
     const handleContextMenu = (e: any) => {
         e.preventDefault();
@@ -19,11 +19,15 @@ export const ContextMenuParentListener = ({children, contextMenu}: any) => {
             x: e.clientX,
             y: e.clientY
         });
+
+        const menu = createMenu();
+        setContextMenuElement(menu);
     };
 
     const handleClick = (e: any) => {
         e.preventDefault();
         setIsContextMenuOpen(false);
+        setContextMenuElement(<div></div>);
     };
 
     return(
@@ -41,7 +45,7 @@ export const ContextMenuParentListener = ({children, contextMenu}: any) => {
                     elementListener={elementListener.current}
                     handleContextMenu={handleContextMenu}
                 >
-                    {contextMenu}
+                    {contextMenuElement}
                 </ContextMenuContainer>}
             </div>
         </ContextMenuContext.Provider>

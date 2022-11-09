@@ -43,7 +43,7 @@ function App() {
   return (
     <div className="App">
       <ContextMenuParentListener
-        contextMenu={
+        createMenu={ () =>
           <ul>
             <li>option1</li>
             <li>option2</li>
@@ -55,8 +55,8 @@ function App() {
         <Grid cols={5} gap={2}>
           {
             items.map( (item: any) => 
-              <ContextMenuChildListener> 
-                <Card key={Id.generate()} >
+              <ContextMenuChildListener key={Id.generate()} > 
+                <Card>
                   {item.content}
                 </Card>
               </ContextMenuChildListener>)
